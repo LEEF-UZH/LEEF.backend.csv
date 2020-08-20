@@ -8,7 +8,7 @@
   "description": "More about what it does (maybe more than one line)\n    Use four spaces when indenting paragraphs within the Description.",
   "name": "LEEF.backend.csv: Add extracted data from one sampling point to backend",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.2.0",
+  "version": "0.7.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -44,30 +44,24 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "dplyr",
-      "name": "dplyr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+      "identifier": "utils",
+      "name": "utils"
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "readr",
-      "name": "readr",
+      "identifier": "yaml",
+      "name": "yaml",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=readr"
+      "sameAs": "https://CRAN.R-project.org/package=yaml"
     }
   ],
   "codeRepository": "https://github.com/LEEF-UZH/LEEF.backend.csv",
   "fileSize": "0KB",
-  "issueTracker": "https://github.com/LEEF-UZH/LEEF.backend.csv/issues"
+  "issueTracker": "https://github.com/LEEF-UZH/LEEF.backend.csv/issues",
+  "readme": "https://github.com/LEEF-UZH/LEEF.backend.csv/blob/master/Readme.md"
 }

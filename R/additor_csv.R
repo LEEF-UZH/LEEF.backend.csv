@@ -1,27 +1,27 @@
 #' Write a raw data table
 #'
-#' Add new data to the database. If a table exist, append it, if not, create a new table with the name \code{name} if \code{create_new_table = TRUE}.
+#' Add new data to the database. If a table exist, append it, if not, create a
+#' new table.
 #'
-#' @param create_new_table if \code{TRUE}, create a new table if it does not exist. Default \code{FALSE}, i.e. raises error if the table does not exist.
+#' @param input directory from which to read the data
+#' @param output directory to which to write the data to
 #'
 #' @return returns invisible\code{TRUE}
-#' @importFrom DBI dbWriteTable dbExistsTable
-#' @export
 #'
-#' @examples
+#' @importFrom utils write.table read.csv
+#' @importFrom yaml yaml.load_file
+#'
+#' @export
 additor_csv <- function(
   input,
-  output,
-  create_new_table = FALSE
+  output
 ){
   new_data_pattern <- "\\.rds$"
 
-  input_files <- list.files(
-    path = input,
-    pattern = new_data_pattern,
-    full.names = TRUE,
-    recursive = TRUE
-  )
+  smdf <- file.path(input, "sample_metadata.yml")
+  smd <- yaml::yaml.load_file( smdf )
+
+  sample_name <- paste(smd$name, smd$timestamp, sep = "_")
 
 # create directory structure if it does not exist -------------------------
 
@@ -39,6 +39,17 @@ additor_csv <- function(
     )
   }
 
+
+# Copy output to temporary directory --------------------------------------
+
+  tmpdir <- tempfile()
+  dir.create( tmpdir, showWarnings = FALSE, recursive = TRUE )
+  file.copy(
+    from = file.path(output, "."),
+    to = tmpdir,
+    recursive = TRUE
+  )
+
 # Iterate through measurements --------------------------------------------
 
   measures <- list.dirs(input, full.names = FALSE, recursive = FALSE)
@@ -51,15 +62,42 @@ additor_csv <- function(
       recursive = FALSE
     )
     for (fn_in in input_files) {
+      fn_out <- gsub("\\.rds$", ".csv", fn_in)
+
       x <- readRDS( file.path(input, m, fn_in) )
-      fn_out <- grep("\\.rds$", ".csv", fn_in)
-      write.csv(
+
+      if (file.exists(file.path(tmpdir, m, fn_out))) {
+        x_db <- read.csv(file.path(tmpdir, m, fn_out))
+        if (sample_name %in% x_db$sample_name) {
+          stop("Aborting adding to DB - the same sample name has already be added!")
+        }
+      }
+
+      x$sample_name <- sample_name
+
+      write.table(
         x = x,
-        file = file.path(output, m, fn_out),
-        append = TRUE
+        file = file.path(tmpdir, m, fn_out),
+        append = file.exists(file.path(tmpdir, m, fn_out)),
+        col.names = !file.exists(file.path(tmpdir, m, fn_out)),
+        sep = ",",
+        dec = ".",
+        qmethod = "double"
       )
     }
   }
+
+
+# Copy output back from tmpdir to output ----------------------------------
+
+  unlink(output, recursive = TRUE, force = TRUE)
+  dir.create( output, showWarnings = FALSE, recursive = TRUE )
+  file.copy(
+    from = file.path(tmpdir, "."),
+    to = output,
+    recursive = TRUE
+  )
+  unlink(tmpdir, recursive = TRUE, force = TRUE)
 
 # Finalise stuff ----------------------------------------------------------
 

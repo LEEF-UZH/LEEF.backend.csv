@@ -4,14 +4,17 @@
 \alias{additor_csv}
 \title{Write a raw data table}
 \usage{
-additor_csv(input, output, create_new_table = FALSE)
+additor_csv(input, output)
 }
 \arguments{
-\item{create_new_table}{if \code{TRUE}, create a new table if it does not exist. Default \code{FALSE}, i.e. raises error if the table does not exist.}
+\item{input}{directory from which to read the data}
+
+\item{output}{directory to which to write the data to}
 }
 \value{
 returns invisible\code{TRUE}
 }
 \description{
-Add new data to the database. If a table exist, append it, if not, create a new table with the name \code{name} if \code{create_new_table = TRUE}.
+Add new data to the database. If a table exist, append it, if not, create a
+new table.
 }
