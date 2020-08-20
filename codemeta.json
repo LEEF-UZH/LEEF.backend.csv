@@ -1,0 +1,73 @@
+{
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
+  "@type": "SoftwareSourceCode",
+  "identifier": "LEEF.backend.csv",
+  "description": "More about what it does (maybe more than one line)\n    Use four spaces when indenting paragraphs within the Description.",
+  "name": "LEEF.backend.csv: Add extracted data from one sampling point to backend",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.2.0",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Rainer M.",
+      "familyName": "Krug",
+      "email": "Rainer.Krug@uzh.zch"
+    }
+  ],
+  "contributor": {},
+  "copyrightHolder": {},
+  "funder": {},
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Rainer M.",
+      "familyName": "Krug",
+      "email": "Rainer.Krug@uzh.zch"
+    }
+  ],
+  "softwareSuggestions": [],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.5.0"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "readr",
+      "name": "readr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=readr"
+    }
+  ],
+  "codeRepository": "https://github.com/LEEF-UZH/LEEF.backend.csv",
+  "fileSize": "0KB",
+  "issueTracker": "https://github.com/LEEF-UZH/LEEF.backend.csv/issues"
+}

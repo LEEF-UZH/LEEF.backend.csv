@@ -1,0 +1,19 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^Makefile$
+^Readme\\.$
+^README\..*$
+
+## Temporary folder
+^tmp$
+^temp$
+^local$
+
+## Example Data Folder
+## Example Data Folder
+^0\.raw\.data$
+^1\.pre-processed\.data$
+^2\.extracted\.data$
+^3\.archived\.data$
+^9\.backend$
+^codemeta\.json$
