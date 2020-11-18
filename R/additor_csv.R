@@ -21,7 +21,7 @@ additor_csv <- function(
   smdf <- file.path(input, "sample_metadata.yml")
   smd <- yaml::yaml.load_file( smdf )
 
-  sample_name <- paste(smd$name, smd$timestamp, sep = "_")
+  sample_day_id <- paste(smd$name, smd$timestamp, sep = "_")
 
 # create directory structure if it does not exist -------------------------
 
@@ -68,18 +68,19 @@ additor_csv <- function(
 
       if (file.exists(file.path(tmpdir, m, fn_out))) {
         x_db <- read.csv(file.path(tmpdir, m, fn_out))
-        if (sample_name %in% x_db$sample_name) {
+        if (sample_day_id %in% x_db$sample_day_id) {
           stop("Aborting adding to DB - the same sample name has already be added!")
         }
       }
 
-      x$sample_name <- sample_name
+      x$sample_day_id <- sample_day_id
 
       write.table(
         x = x,
         file = file.path(tmpdir, m, fn_out),
         append = file.exists(file.path(tmpdir, m, fn_out)),
         col.names = !file.exists(file.path(tmpdir, m, fn_out)),
+        row.names = FALSE,
         sep = ",",
         dec = ".",
         qmethod = "double"
