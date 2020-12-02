@@ -16,7 +16,7 @@ additor_csv <- function(
   input,
   output
 ){
-  new_data_pattern <- "\\.rds$"
+  new_data_pattern <- "\\.csv$"
 
   smdf <- file.path(input, "sample_metadata.yml")
   smd <- yaml::yaml.load_file( smdf )
@@ -62,9 +62,9 @@ additor_csv <- function(
       recursive = FALSE
     )
     for (fn_in in input_files) {
-      fn_out <- gsub("\\.rds$", ".csv", fn_in)
+      fn_out <- gsub("\\.csv$", ".csv", fn_in)
 
-      x <- readRDS( file.path(input, m, fn_in) )
+      x <- read.csvS( file.path(input, m, fn_in) )
 
       if (file.exists(file.path(tmpdir, m, fn_out))) {
         x_db <- read.csv(file.path(tmpdir, m, fn_out))
