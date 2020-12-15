@@ -3,7 +3,7 @@ Type: Package
 Title: Add extracted data from one sampling point to backend
 Version: 0.7.0
 Authors@R: c(
-  person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.zch", role = c("aut", "cre"))
+  person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.ch", role = c("aut", "cre"))
   )
 Maintainer: Rainer M. Krug <Rainer.Krug@uzh.ch>
 BugReports: https://github.com/LEEF-UZH/LEEF.backend.csv/issues

@@ -18,11 +18,6 @@ additor_csv <- function(
 ){
   new_data_pattern <- "\\.csv$"
 
-  smdf <- file.path(input, "sample_metadata.yml")
-  smd <- yaml::yaml.load_file( smdf )
-
-  sample_day_id <- paste(smd$name, smd$timestamp, sep = "_")
-
 # create directory structure if it does not exist -------------------------
 
   dirs <- list.dirs(
@@ -61,10 +56,13 @@ additor_csv <- function(
       full.names = FALSE,
       recursive = FALSE
     )
+  	smd <- yaml::yaml.load_file( file.path(input, m, §) )
+  	sample_day_id <- paste(smd$name, smd$timestamp, sep = "_")
+
     for (fn_in in input_files) {
       fn_out <- gsub("\\.csv$", ".csv", fn_in)
 
-      x <- read.csvS( file.path(input, m, fn_in) )
+      x <- utils::read.csv( file.path(input, m, fn_in) )
 
       if (file.exists(file.path(tmpdir, m, fn_out))) {
         x_db <- read.csv(file.path(tmpdir, m, fn_out))
